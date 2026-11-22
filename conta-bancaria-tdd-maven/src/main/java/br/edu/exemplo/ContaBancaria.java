@@ -3,10 +3,6 @@ package br.edu.exemplo;
 public class ContaBancaria {
     private double saldo;
 
-    public ContaBancaria() {
-        this.saldo = 0;
-    }
-
     public double getSaldo() {
         return saldo;
     }
@@ -16,8 +12,12 @@ public class ContaBancaria {
     }
 
     public void sacar(double valor) {
-        if (valor <= saldo) {
+        if (temSaldoSuficiente(valor)) {
             saldo -= valor;
         }
+    }
+
+    private boolean temSaldoSuficiente(double valor) {
+        return valor <= saldo;
     }
 }
