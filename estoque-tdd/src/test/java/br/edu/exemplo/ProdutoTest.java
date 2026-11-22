@@ -54,4 +54,12 @@ class ProdutoTest {
 
         assertEquals(0, produto.getQuantidade());
     }
+    @Test
+    void naoDeveAdicionarQuantidadeZero() {
+        Produto produto = new Produto("Teclado");
+
+        produto.adicionarEstoque(0);
+
+        assertEquals(0, produto.getQuantidade());
+    }
 }
