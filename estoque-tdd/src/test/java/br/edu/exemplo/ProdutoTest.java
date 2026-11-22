@@ -11,5 +11,12 @@ class ProdutoTest {
 
         assertEquals(0, produto.getQuantidade());
     }
+    @Test
+    void deveAdicionarProdutoAoEstoque() {
+        Produto produto = new Produto("Teclado");
 
+        produto.adicionarEstoque(10);
+
+        assertEquals(10, produto.getQuantidade());
+    }
 }
