@@ -10,6 +10,9 @@ public class Carrinho {
     public void adicionar(Produto produto) {
         produtos.add(produto);
     }
+    public void remover(Produto produto) {
+        produtos.remove(produto);
+    }
 
     public double getTotal() {
         double total = 0;
