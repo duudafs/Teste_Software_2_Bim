@@ -15,6 +15,9 @@ public class Produto {
         this.quantidade += quantidade;
     }
     public void retirarEstoque(int quantidade) {
-        this.quantidade -= quantidade;
+        if (quantidade <= this.quantidade) {
+            this.quantidade -= quantidade;
+        }
     }
+
 }
