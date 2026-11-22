@@ -19,4 +19,11 @@ class CarrinhoTest {
         carrinho.adicionar(new Produto("Teclado", 100.0));
         assertEquals(100.0, carrinho.getTotal(), 0.001);
     }
+    @Test
+    void deveSomarVariosProdutos() {
+        Carrinho carrinho = new Carrinho();
+        carrinho.adicionar(new Produto("Teclado", 100.0));
+        carrinho.adicionar(new Produto("Mouse", 50.0));
+        assertEquals(150.0, carrinho.getTotal(), 0.001);
+    }
 }
