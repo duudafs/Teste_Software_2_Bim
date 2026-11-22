@@ -22,6 +22,9 @@ public class Carrinho {
         for (Produto p : produtos) {
             total += p.getPreco();
         }
+        if (total >= 500) {
+            total = total * 0.9;
+        }
         return total;
     }
 }
