@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Carrinho {
 
+    private static final double VALOR_MINIMO_DESCONTO = 500.0;
+    private static final double PERCENTUAL_DESCONTO = 0.10;
+
     private List<Produto> produtos = new ArrayList<>();
 
     public void adicionar(Produto produto) {
@@ -13,18 +16,24 @@ public class Carrinho {
         }
         produtos.add(produto);
     }
+
     public void remover(Produto produto) {
         produtos.remove(produto);
     }
 
-    public double getTotal() {
-        double total = 0;
+    public double getSubtotal() {
+        double subtotal = 0;
         for (Produto p : produtos) {
-            total += p.getPreco();
+            subtotal += p.getPreco();
         }
-        if (total >= 500) {
-            total = total * 0.9;
+        return subtotal;
+    }
+
+    public double getTotal() {
+        double subtotal = getSubtotal();
+        if (subtotal >= VALOR_MINIMO_DESCONTO) {
+            return subtotal * (1 - PERCENTUAL_DESCONTO);
         }
-        return total;
+        return subtotal;
     }
 }
