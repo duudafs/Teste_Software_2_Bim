@@ -8,6 +8,9 @@ public class Carrinho {
     private List<Produto> produtos = new ArrayList<>();
 
     public void adicionar(Produto produto) {
+        if (produto.getPreco() < 0) {
+            throw new IllegalArgumentException("Preço não pode ser negativo");
+        }
         produtos.add(produto);
     }
     public void remover(Produto produto) {

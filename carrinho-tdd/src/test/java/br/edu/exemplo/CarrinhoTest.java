@@ -38,4 +38,12 @@ class CarrinhoTest {
 
         assertEquals(100.0, carrinho.getTotal(), 0.001);
     }
+    @Test
+    void naoDevePermitirProdutoComPrecoNegativo() {
+        Carrinho carrinho = new Carrinho();
+        Produto invalido = new Produto("Teclado", -100.0);
+
+        assertThrows(IllegalArgumentException.class,
+                () -> carrinho.adicionar(invalido));
+    }
 }
