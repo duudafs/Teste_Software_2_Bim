@@ -62,4 +62,10 @@ class ProdutoTest {
 
         assertEquals(0, produto.getQuantidade());
     }
+    @Test
+    void deveArmazenarNomeDoProduto() {
+        Produto produto = new Produto("Teclado");
+
+        assertEquals("Teclado", produto.getNome());
+    }
 }
