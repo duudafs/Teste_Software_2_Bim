@@ -37,4 +37,13 @@ class ProdutoTest {
 
         assertEquals(7, produto.getQuantidade());
     }
+    @Test
+    void naoDeveRetirarQuantidadeMaiorQueEstoque() {
+        Produto produto = new Produto("Teclado");
+
+        produto.adicionarEstoque(10);
+        produto.retirarEstoque(15);
+
+        assertEquals(10, produto.getQuantidade());
+    }
 }
