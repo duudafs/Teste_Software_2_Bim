@@ -26,5 +26,12 @@ class ContaBancariaTest {
         conta.sacar(40);
         assertEquals(60, conta.getSaldo(), 0.001);
     }
+    @Test
+    void naoDevePermitirSaqueMaiorQueSaldo() {
+        ContaBancaria conta = new ContaBancaria();
+        conta.depositar(100);
+        conta.sacar(150);
+        assertEquals(100, conta.getSaldo(), 0.001);
+    }
 
 }
