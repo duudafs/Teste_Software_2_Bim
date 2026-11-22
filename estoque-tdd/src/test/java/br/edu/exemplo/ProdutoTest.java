@@ -28,4 +28,13 @@ class ProdutoTest {
 
         assertEquals(15, produto.getQuantidade());
     }
+    @Test
+    void deveRetirarProdutoDoEstoque() {
+        Produto produto = new Produto("Teclado");
+
+        produto.adicionarEstoque(10);
+        produto.retirarEstoque(3);
+
+        assertEquals(7, produto.getQuantidade());
+    }
 }
