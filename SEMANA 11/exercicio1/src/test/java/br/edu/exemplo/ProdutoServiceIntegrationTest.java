@@ -32,9 +32,15 @@ class ProdutoServiceIntegrationTest {
     }
 
     // CT02 — Nome inválido
+
     @Test
     void naoDevePersistirProdutoComNomeEmBranco() {
+        long quantidadeAntes = repository.count();
 
+        assertThrows(IllegalArgumentException.class,
+                () -> service.cadastrar("   ", 80.0));
+
+        assertEquals(quantidadeAntes, repository.count());
     }
     // CT03 — Atualização (desafio)
     @Test
