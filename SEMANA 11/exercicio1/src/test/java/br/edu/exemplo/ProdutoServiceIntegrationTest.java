@@ -45,6 +45,14 @@ class ProdutoServiceIntegrationTest {
     // CT03 — Atualização (desafio)
     @Test
     void deveAtualizarPrecoPersistido() {
-        // TODO DESAFIO: cadastrar, atualizar preço e buscar novamente no repositório.
+        Produto mouse = service.cadastrar("Mouse", 80.0);
+
+        service.atualizarPreco(mouse.getId(), 95.0);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        Produto atualizado = repository.findById(mouse.getId()).orElseThrow();
+        assertEquals(95.0, atualizado.getPreco(), 0.001);
     }
 }
