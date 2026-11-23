@@ -38,6 +38,21 @@ class ProdutoControllerIntegrationTest {
     // CT05 — Consulta via API
     @Test
     void deveBuscarProdutoPelaApi() throws Exception {
+        String respostaPost = mockMvc.perform(post("/produtos")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(JSON_MOUSE))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
 
+        JsonNode json = objectMapper.readTree(respostaPost);
+        long id = json.get("id").asLong();
+
+        mockMvc.perform(get("/produtos/{id}", id))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.nome").value("Mouse"))
+                .andExpect(jsonPath("$.preco").value(80.0));
     }
 }
