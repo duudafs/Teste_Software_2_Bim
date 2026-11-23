@@ -1,24 +1,44 @@
 package br.edu.exemplo;
+
+import br.edu.exemplo.model.Produto;
 import br.edu.exemplo.repository.ProdutoRepository;
 import br.edu.exemplo.service.ProdutoService;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
 import static org.junit.jupiter.api.Assertions.*;
-@SpringBootTest @Transactional
+
+@SpringBootTest
+@Transactional
 class ProdutoServiceIntegrationTest {
- @Autowired ProdutoService service;
- @Autowired ProdutoRepository repository;
- @Test void deveCadastrarERecuperarProduto(){
-  // TODO EX1: cadastrar Teclado por 150, confirmar ID e buscar pelo repositório.
-  // Conferir nome e preço do registro recuperado.
- }
- @Test void naoDevePersistirProdutoComNomeEmBranco(){
-  // TODO EX1: contar registros, tentar cadastrar nome em branco,
-  // verificar IllegalArgumentException e que a contagem não mudou.
- }
- @Test void deveAtualizarPrecoPersistido(){
-  // TODO DESAFIO: cadastrar, atualizar preço e buscar novamente no repositório.
- }
+
+    @Autowired ProdutoService service;
+    @Autowired ProdutoRepository repository;
+    @Autowired EntityManager entityManager;
+
+    // CT01 — Cadastro válido
+    @Test
+    void deveCadastrarERecuperarProduto() {
+        Produto salvo = service.cadastrar("Teclado", 150.0);
+
+        assertNotNull(salvo.getId());
+
+        Produto encontrado = repository.findById(salvo.getId()).orElseThrow();
+        assertEquals("Teclado", encontrado.getNome());
+        assertEquals(150.0, encontrado.getPreco(), 0.001);
+    }
+
+    // CT02 — Nome inválido
+    @Test
+    void naoDevePersistirProdutoComNomeEmBranco() {
+
+    }
+    // CT03 — Atualização (desafio)
+    @Test
+    void deveAtualizarPrecoPersistido() {
+        // TODO DESAFIO: cadastrar, atualizar preço e buscar novamente no repositório.
+    }
 }
